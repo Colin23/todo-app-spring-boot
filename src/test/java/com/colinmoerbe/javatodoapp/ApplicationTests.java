@@ -1,13 +1,13 @@
-package colin.moerbe.javatodoapp;
+package com.colinmoerbe.javatodoapp;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class JavatodoappApplicationTests {
+public class ApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+    @Test
+    void contextLoads() {
 
+    }
 }
