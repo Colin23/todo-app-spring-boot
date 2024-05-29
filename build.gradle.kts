@@ -12,6 +12,7 @@ plugins {
 
 group = "com.colinmoerbe"
 
+// Exposed additional information about the application to the /info actuator endpoint.
 springBoot {
     buildInfo()
 }
@@ -54,19 +55,24 @@ tasks.withType<Test> {
     useJUnitPlatform()
 }
 
+tasks.named<DefaultTask>("checkstyleMain").configure {
+    isEnabled = true
+}
+
+tasks.named<DefaultTask>("checkstyleTest").configure {
+    isEnabled = true
+}
+
 tasks.named<CheckForbiddenApis>("forbiddenApisMain").configure {
 	bundledSignatures = setOf("jdk-unsafe", "jdk-deprecated", "jdk-internal", "jdk-non-portable", "jdk-system-out", "jdk-reflection")
 	signaturesFiles = project.files("forbidden-apis.txt")
+    isEnabled = true
 }
 
 tasks.named<CheckForbiddenApis>("forbiddenApisTest").configure {
 	bundledSignatures = setOf("jdk-unsafe", "jdk-deprecated", "jdk-internal", "jdk-non-portable", "jdk-reflection")
 	signaturesFiles = project.files("forbidden-apis.txt")
 	isEnabled = true
-}
-
-tasks.named<DefaultTask>("checkstyleTest").configure {
-	isEnabled = false
 }
 
 tasks.named("check").configure {
