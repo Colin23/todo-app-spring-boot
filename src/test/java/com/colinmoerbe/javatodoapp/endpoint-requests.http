@@ -1,0 +1,19 @@
+### Get all tests
+GET http://localhost:8080/api/tests
+Accept: application/json
+
+### Get a specific test
+GET http://localhost:8080/api/test/1
+Accept: application/json
+
+### Update a specific test
+PUT http://localhost:8080/api/tests
+Accept: application/json
+
+### Create a new test
+POST http://localhost:8080/api/tests
+Accept: application/json
+
+### Delete a specific test
+DELETE http://localhost:8080/api/test/1
+Accept: application/json
