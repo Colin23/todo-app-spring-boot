@@ -1,4 +1,4 @@
-package com.colinmoerbe.javatodoapp.backend;
+package com.colinmoerbe.javatodoapp.todo;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/api")
-class TestController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(TestController.class);
+class TodoController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(TodoController.class);
 
     @Value("${test.password}")
     private String testPassword;
@@ -25,29 +25,29 @@ class TestController {
     @Value("${test.username}")
     private String testUsername;
 
-    @GetMapping("/tests")
-    public String getTestsEndpoint() {
-        LOGGER.info("Successfully called the /tests endpoint");
+    @GetMapping("/v1/todos")
+    public String getTodos() {
+        LOGGER.info("Successfully called the /v1/todos endpoint");
         return "Testing " + testUsername + " asdf " + testPassword;
     }
 
-    @GetMapping("/test/{id}")
-    public String getTestEndpoint(@PathVariable Integer id) {
+    @GetMapping("/v1/todos/{id}")
+    public String getTodo(@PathVariable Integer id) {
         return "Test with ID: " + id;
     }
 
-    @PutMapping("/test/{id}")
-    public String putTestEndpoint(@PathVariable Integer id) {
+    @PutMapping("/v1/todos/{id}")
+    public String updateTodo(@PathVariable Integer id) {
         return "Update method is not yet implemented";
     }
 
-    @PostMapping("/tests")
-    public String postTestsEndpoint() {
+    @PostMapping("/v1/todos")
+    public String createTodo() {
         return "Create method is not yet implemented";
     }
 
-    @DeleteMapping("/test/{id}")
-    public String deleteTestEndpoint(@PathVariable Integer id) {
+    @DeleteMapping("/v1/todos/{id}")
+    public String deleteTodo(@PathVariable Integer id) {
         return "Delete method is not yet implemented";
     }
 }
