@@ -37,3 +37,4 @@ out/
 
 ### Ignore Secrets ###
 application.properties
+.env

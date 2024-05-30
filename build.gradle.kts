@@ -35,18 +35,25 @@ dependencyManagement {
 }
 val checkstyleVersion = "10.17.0"
 val dependencySlf4jVersion = "2.0.13"
+val dependencyPostgresqlVersion = "42.7.3"
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.springframework.boot:spring-boot-docker-compose")
+    implementation("org.springframework.boot:spring-boot-testcontainers")
     implementation("org.slf4j:slf4j-api:$dependencySlf4jVersion")
+    implementation("org.postgresql:postgresql:$dependencyPostgresqlVersion")
 
     developmentOnly("org.springframework.boot:spring-boot-devtools") // Ctrl+F9 for recompiling, this fast restarts the server
 
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.springframework.boot:spring-boot-testcontainers")
     testImplementation("org.junit.jupiter:junit-jupiter")
+    testImplementation("org.testcontainers:postgresql")
 }
 
 // Loads the versioning logic, and the custom Gradle tasks
