@@ -1,5 +1,6 @@
 package com.colinmoerbe.javatodoapp.todo;
 
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,13 +12,20 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+import java.util.Optional;
+
 /**
  * This class is currently only for testing the initial setup only.
  */
 @RestController
 @RequestMapping("/api")
+@RequiredArgsConstructor
 class TodoController {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(TodoController.class);
+
+    private final TodoRepository todoRepository;
 
     @Value("${test.password}")
     private String testPassword;
@@ -26,19 +34,19 @@ class TodoController {
     private String testUsername;
 
     @GetMapping("/v1/todos")
-    public String getTodos() {
+    List<Todo> getTodos() {
         LOGGER.info("Successfully called the /v1/todos endpoint");
-        return "Testing " + testUsername + " asdf " + testPassword;
+        return todoRepository.findAll();
     }
 
     @GetMapping("/v1/todos/{id}")
-    public String getTodo(@PathVariable Integer id) {
-        return "Test with ID: " + id;
+    Optional<Todo> getTodo(@PathVariable Integer id) {
+        return null;
     }
 
     @PutMapping("/v1/todos/{id}")
-    public String updateTodo(@PathVariable Integer id) {
-        return "Update method is not yet implemented";
+    void updateTodo(@PathVariable Integer id) {
+
     }
 
     @PostMapping("/v1/todos")
