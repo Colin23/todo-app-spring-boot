@@ -11,7 +11,7 @@ import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,24 +48,27 @@ class TodoControllerTest {
      * Initializes the {@code todos} list with predefined To-Do objects and configures
      * the mocked {@code todoRepository} to return this list when {@link ListCrudRepository#findAll()} is called.
      * </p>
+     * <p>
+     * Note that a missing {@code id} field will be set to '0', a missing {@code createdAt} field will be set to 'null'
+     * and a missing {@code completed} field will be set to 'false'.
+     * </p>
      */
     @BeforeEach
     void setUp() {
         todos = List.of(
-            new Todo(
-                1,
-                "Test World",
-                "Test world description",
-                LocalDate.of(2024, 5, 31),
-                LocalDate.of(2024, 5, 31),
-                1),
-            new Todo(
-                2,
-                "Test World2",
-                "Test world description2",
-                LocalDate.of(2024, 5, 31),
-                LocalDate.of(2024, 5, 31),
-                1)
+            Todo.builder()
+                .id(1)
+                .title("Test World")
+                .description("Test world description")
+                .createdAt(LocalDateTime.of(2024, 5, 31, 20, 30, 10))
+                .dueAt(LocalDateTime.of(2024, 5, 31, 23, 33, 13))
+                .completed(true)
+                .build(),
+            Todo.builder()
+                .title("Test World2")
+                .description("Test world description2")
+                .dueAt(LocalDateTime.of(2024, 5, 31, 15, 20, 25))
+                .build()
         );
     }
 
@@ -80,23 +83,21 @@ class TodoControllerTest {
      */
     @Test
     void shouldGetAllTodos() throws Exception {
+        // This follows the same rules for setting missing field as described for the 'setUp' method.
         final String jsonResponse = """
             [
                 {
                     "id": 1,
-                    "title": "Test World",
-                    "description": "Test world description",
-                    "created_at": "2024-05-31",
-                    "due_at": "2024-05-31",
-                    "version": 1
+                    "todo_title": "Test World",
+                    "todo_description": "Test world description",
+                    "todo_created_at": "2024-05-31T20:30:10",
+                    "todo_due_at": "2024-05-31T23:33:13",
+                    "todo_completed": true
                 },
                 {
-                    "id": 2,
-                    "title": "Test World2",
-                    "description": "Test world description2",
-                    "created_at": "2024-05-31",
-                    "due_at": "2024-05-31",
-                    "version": 1
+                    "todo_title": "Test World2",
+                    "todo_description": "Test world description2",
+                    "todo_due_at": "2024-05-31T15:20:25"
                 }
             ]
             """;
@@ -105,6 +106,7 @@ class TodoControllerTest {
         final ResultActions resultActions = mockMvc.perform(get("/api/v1/todos"))
             .andExpect(status().isOk())
             .andExpect(content().json(jsonResponse));
+        System.out.println(resultActions.andReturn().getResponse().getContentAsString());
 
         JSONAssert.assertEquals(jsonResponse, resultActions.andReturn().getResponse().getContentAsString(), false);
     }

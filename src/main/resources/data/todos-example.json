@@ -2,19 +2,16 @@
     "todos": [
         {
             "id": 1,
-            "title": "Hello World",
-            "description": "Hello world description",
-            "created_at": "2024-05-31",
-            "due_at": "2024-05-31",
-            "version": 1
+            "todo_title": "Test World",
+            "todo_description": "Test world description",
+            "todo_created_at": "2024-05-31T20:30:10",
+            "todo_due_at": "2024-05-31T23:33:13",
+            "todo_completed": true
         },
         {
-            "id": 2,
-            "title": "Hello World2",
-            "description": "Hello world description2",
-            "created_at": "2024-05-31",
-            "due_at": "2024-05-31",
-            "version": 1
+            "todo_title": "Test World2",
+            "todo_description": "Test world description2",
+            "todo_due_at": "2024-05-31T15:20:25"
         }
     ]
 }

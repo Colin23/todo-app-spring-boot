@@ -43,6 +43,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-docker-compose")
     implementation("org.springframework.boot:spring-boot-testcontainers")
+    implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.slf4j:slf4j-api:$dependencySlf4jVersion")
     implementation("org.postgresql:postgresql:$dependencyPostgresqlVersion")
 
