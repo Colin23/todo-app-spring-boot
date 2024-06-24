@@ -10,12 +10,12 @@ import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 /**
  * This class represents a To-Do item with all its details. These are:
@@ -38,9 +38,6 @@ import java.time.LocalDateTime;
 @Table(name = "todo")
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor()
-@Builder
 public class Todo {
 
     /**
@@ -105,7 +102,19 @@ public class Todo {
      */
     @Column(name = "todo_completed", nullable = false)
     @JsonProperty("todo_completed")
-    private boolean completed;
+    private Boolean completed;
+
+    // Default constructor
+    public Todo() { }
+
+    // Constructor without ID
+    private Todo(Builder builder) {
+        this.title = builder.title;
+        this.description = builder.description;
+        this.createdAt = builder.createdAt;
+        this.dueAt = builder.dueAt;
+        this.completed = builder.completed;
+    }
 
     /**
      * Sets the {@code createdAt} field to the current timestamp before the entity is persisted.
@@ -115,7 +124,38 @@ public class Todo {
     @PrePersist
     protected void onCreate() {
         if (this.createdAt == null) {
-            this.createdAt = LocalDateTime.now();
+            // ZoneId for Coordinated Universal Time (UTC) or Central European Summer Time (CEST)
+            this.createdAt = LocalDateTime.now(ZoneId.of("UTC+2"));
+        }
+        if (this.completed == null) {
+            this.completed = false;
+        }
+    }
+
+    public static class Builder {
+        private String title;
+        private String description = "";
+        private LocalDateTime createdAt = null;
+        private LocalDateTime dueAt = null;
+        private Boolean completed = false; // default value
+
+        public Builder(String title, String description) {
+            this.title = title;
+            this.description = description;
+        }
+
+        public Builder dueAt(LocalDateTime dueAt) {
+            this.dueAt = dueAt;
+            return this;
+        }
+
+        public Builder completed(boolean completed) {
+            this.completed = completed;
+            return this;
+        }
+
+        public Todo build() {
+            return new Todo(this);
         }
     }
 }

@@ -55,19 +55,16 @@ class TodoControllerTest {
      */
     @BeforeEach
     void setUp() {
-        todos = List.of(
-            Todo.builder()
-                .id(1)
-                .title("Test World")
-                .description("Test world description")
-                .createdAt(LocalDateTime.of(2024, 5, 31, 20, 30, 10))
+        todos = List.of(new Todo.Builder(
+            "Test World",
+            "Test world description")
                 .dueAt(LocalDateTime.of(2024, 5, 31, 23, 33, 13))
                 .completed(true)
                 .build(),
-            Todo.builder()
-                .title("Test World2")
-                .description("Test world description2")
-                .dueAt(LocalDateTime.of(2024, 5, 31, 15, 20, 25))
+
+            new Todo.Builder(
+                "Test World2",
+                "Test world description2")
                 .build()
         );
     }
@@ -87,17 +84,15 @@ class TodoControllerTest {
         final String jsonResponse = """
             [
                 {
-                    "id": 1,
+                    "id": 0,
                     "todo_title": "Test World",
                     "todo_description": "Test world description",
-                    "todo_created_at": "2024-05-31T20:30:10",
                     "todo_due_at": "2024-05-31T23:33:13",
                     "todo_completed": true
                 },
                 {
                     "todo_title": "Test World2",
-                    "todo_description": "Test world description2",
-                    "todo_due_at": "2024-05-31T15:20:25"
+                    "todo_description": "Test world description2"
                 }
             ]
             """;
