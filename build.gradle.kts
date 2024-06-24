@@ -30,12 +30,12 @@ repositories {
 dependencyManagement {
     imports {
         mavenBom ("org.springframework.boot:spring-boot-dependencies:3.3.0")
-        mavenBom ("org.junit:junit-bom:5.10.2")
     }
 }
 val checkstyleVersion = "10.17.0"
 val dependencySlf4jVersion = "2.0.13"
 val dependencyPostgresqlVersion = "42.7.3"
+val dependencyHttpClientVersion = "5.3.1"
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
@@ -46,6 +46,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.slf4j:slf4j-api:$dependencySlf4jVersion")
     implementation("org.postgresql:postgresql:$dependencyPostgresqlVersion")
+    implementation("org.apache.httpcomponents.client5:httpclient5:$dependencyHttpClientVersion") // Necessary so that PATCH requests work
 
     developmentOnly("org.springframework.boot:spring-boot-devtools") // Ctrl+F9 for recompiling, this fast restarts the server
 
@@ -53,7 +54,9 @@ dependencies {
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.boot:spring-boot-testcontainers")
+    testImplementation("org.testcontainers:junit-jupiter:")
     testImplementation("org.junit.jupiter:junit-jupiter")
+    testImplementation("org.assertj:assertj-core:")
     testImplementation("org.testcontainers:postgresql")
 }
 

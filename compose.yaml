@@ -1,7 +1,6 @@
-version: '3.8'
 services:
     todo-database:
-        image: postgres:latest
+        image: postgres:16.3 # Keep in sync with the latest stable version -> https://www.postgresql.org/docs/release/
         environment:
             - POSTGRES_DB=todo-database
             - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
