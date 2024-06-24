@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS todo (
     todo_title          varchar(100)    NOT NULL,
     todo_description    varchar(255),
     todo_created_at     timestamp       NOT NULL    DEFAULT CURRENT_TIMESTAMP, -- This should not be edited by the user and should also be handled by the application.
-    todo_due_at         timestamp,
+    todo_due_at         timestamp       NULL, -- Make this column nullable
     todo_completed      boolean         NOT NULL    DEFAULT false
 );
 
