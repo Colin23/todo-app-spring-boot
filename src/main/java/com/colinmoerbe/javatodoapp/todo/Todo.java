@@ -138,8 +138,8 @@ public class Todo {
      */
     public static class Builder {
         private final String title;
-        private String description = "";
-        private LocalDateTime createdAt = null;
+        private final String description;
+        private final LocalDateTime createdAt = null;
         private LocalDateTime dueAt = null;
         private Boolean completed = false;
 

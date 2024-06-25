@@ -106,9 +106,6 @@ class TodoController {
                 if (partialTodo.getDueAt() != null) {
                     existingTodo.setDueAt(partialTodo.getDueAt());
                 }
-                if (partialTodo.getCompleted() == null) {
-                    existingTodo.setCompleted(partialTodo.getCompleted());
-                }
                 return todoRepository.save(existingTodo);
             })
             .orElseThrow(TodoNotFoundException::new);
