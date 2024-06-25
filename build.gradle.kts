@@ -10,7 +10,7 @@ plugins {
 	id("de.thetaphi.forbiddenapis") version "3.7"
 }
 
-group = "com.colinmoerbe"
+group = "com.colin-moerbe"
 
 // Exposed additional information about the application to the /info actuator endpoint.
 springBoot {
