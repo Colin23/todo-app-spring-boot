@@ -4,7 +4,7 @@ plugins {
 	java
     idea
     checkstyle
-    id("org.springframework.boot") version "3.3.0"
+    id("org.springframework.boot") version "3.3.1"
     id("io.spring.dependency-management") version "1.1.5"
 	id("io.freefair.lombok") version "8.6"
 	id("de.thetaphi.forbiddenapis") version "3.7"
@@ -29,13 +29,9 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom ("org.springframework.boot:spring-boot-dependencies:3.3.0")
+        mavenBom ("org.springframework.boot:spring-boot-dependencies:3.3.1") // This actually sets every version I currently need
     }
 }
-val checkstyleVersion = "10.17.0"
-val dependencySlf4jVersion = "2.0.13"
-val dependencyPostgresqlVersion = "42.7.3"
-val dependencyHttpClientVersion = "5.3.1"
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
@@ -44,9 +40,9 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-docker-compose")
     implementation("org.springframework.boot:spring-boot-testcontainers")
     implementation("org.springframework.boot:spring-boot-starter-validation")
-    implementation("org.slf4j:slf4j-api:$dependencySlf4jVersion")
-    implementation("org.postgresql:postgresql:$dependencyPostgresqlVersion")
-    implementation("org.apache.httpcomponents.client5:httpclient5:$dependencyHttpClientVersion") // Necessary so that PATCH requests work
+    implementation("org.slf4j:slf4j-api")
+    implementation("org.postgresql:postgresql")
+    implementation("org.apache.httpcomponents.client5:httpclient5") // Necessary so that PATCH requests work
 
     developmentOnly("org.springframework.boot:spring-boot-devtools") // Ctrl+F9 for recompiling, this fast restarts the server
 
@@ -100,5 +96,5 @@ idea {
 
 checkstyle {
 	configFile = project.file("checkstyle.xml")
-	toolVersion = checkstyleVersion
+	toolVersion = "10.17.0"
 }
