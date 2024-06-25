@@ -5,9 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
+import org.springframework.context.annotation.Import;
 import org.testcontainers.containers.PostgreSQLContainer;
-import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.time.LocalDateTime;
@@ -18,24 +17,24 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Testcontainers
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@Import(TestcontainerConfiguration.class)
 class TodoRepositoryTest {
-
-    @Container
-    @ServiceConnection
-    private static final PostgreSQLContainer<?> POSTGRES = new PostgreSQLContainer<>("postgres:16.3");
 
     @Autowired
     private TodoRepository todoRepository;
 
+    @Autowired
+    private PostgreSQLContainer postgreSQLContainer;
+
     @Test
     void postgresConnectionShouldBeEstablished() {
-        assertThat(POSTGRES.isCreated()).isTrue();
-        assertThat(POSTGRES.isRunning()).isTrue();
+        assertThat(postgreSQLContainer.isCreated()).isTrue();
+        assertThat(postgreSQLContainer.isRunning()).isTrue();
     }
 
     @BeforeEach
     void setUp() {
-        List<Todo> todos = List.of(new Todo.Builder(
+        final List<Todo> todos = List.of(new Todo.Builder(
             "Test World",
             "Test world description")
             .dueAt(LocalDateTime.of(2024, 5, 31, 23, 33, 13))
@@ -47,7 +46,7 @@ class TodoRepositoryTest {
 
     @Test
     void shouldReturnTodoByTitle() {
-        Todo todo = todoRepository.findByTitle("Test World");
+        final Todo todo = todoRepository.findByTitle("Test World");
         assertThat(todo).isNotNull();
     }
 }
