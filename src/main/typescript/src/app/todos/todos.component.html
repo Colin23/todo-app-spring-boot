@@ -1,0 +1,26 @@
+<div class="card my-5">
+    <div class="card-body">
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Created at</th>
+                <th scope="col">Due At</th>
+                <th scope="col">Completed</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let todo of todos">
+                <td>{{ todo.id }}</td>
+                <td>{{ todo.todo_title }}</td>
+                <td>{{ todo.todo_description }}</td>
+                <td>{{ todo.todo_created_at }}</td>
+                <td>{{ todo.todo_due_at }}</td>
+                <td>{{ todo.todo_completed }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
