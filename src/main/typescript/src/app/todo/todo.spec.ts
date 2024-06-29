@@ -1,7 +1,16 @@
-import { Todo } from './todo';
+import {Todo} from './todo';
 
-describe('Todo', () => {
-  it('should create an instance', () => {
-    expect(new Todo()).toBeTruthy();
-  });
+
+describe('Todo', (): void => {
+    it('should create an instance', (): void => {
+        const todo = new Todo(
+            1,
+            "Test Todo",
+            "Test description",
+            new Date(),
+            new Date(),
+            false
+        );
+        expect(todo).toBeTruthy();
+    });
 });

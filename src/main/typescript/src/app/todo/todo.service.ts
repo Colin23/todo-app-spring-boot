@@ -14,17 +14,14 @@ export class TodoService {
     }
 
     public getTodos(): Observable<Todo[]> {
-        let asdf = this.httpClient.get<Todo[]>(this.backendUrl);
-        console.log("asdf");
-        console.log(asdf);
         return this.httpClient.get<Todo[]>(this.backendUrl).pipe(
-            map(data => data.map(item => new Todo(
+            map((data: Todo[]) => data.map((item: Todo) => new Todo(
                 item.id,
-                item.title,
-                item.description,
-                new Date(item.createdAt),
-                new Date(item.dueAt),
-                item.completed
+                item.todo_title,
+                item.todo_description,
+                new Date(item.todo_created_at),
+                new Date(item.todo_due_at),
+                item.todo_completed
             )))
         );
     }

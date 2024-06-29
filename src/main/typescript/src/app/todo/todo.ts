@@ -1,17 +1,17 @@
 export class Todo {
     id: number;
-    title: string;
-    description: string;
-    createdAt: Date;
-    dueAt: Date;
-    completed: boolean;
+    todo_title: string; // has to be named like this because of the JSON field name.
+    todo_description: string; // has to be named like this because of the JSON field name.
+    todo_created_at: Date; // has to be named like this because of the JSON field name.
+    todo_due_at: Date; // has to be named like this because of the JSON field name.
+    todo_completed: boolean; // has to be named like this because of the JSON field name.
 
     constructor(id: number, title: string, description: string, createdAt: Date, dueAt: Date, completed: boolean) {
         this.id = id;
-        this.title = title;
-        this.description = description;
-        this.createdAt = new Date(createdAt);
-        this.dueAt = new Date(dueAt);
-        this.completed = completed;
+        this.todo_title = title;
+        this.todo_description = description;
+        this.todo_created_at = new Date(createdAt);
+        this.todo_due_at = new Date(dueAt);
+        this.todo_completed = completed;
     }
 }
