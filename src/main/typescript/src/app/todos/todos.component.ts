@@ -16,17 +16,18 @@ export class TodosComponent implements OnInit {
 
     todos: Todo[] = [];
 
-    constructor(private todoService: TodoService) { }
+    constructor(private todoService: TodoService) {
+    }
 
     ngOnInit(): void {
         this.todoService.getTodos().subscribe({
-            next: (data: Todo[]) => {
+            next: (data: Todo[]): void => {
                 this.todos = data;
             },
-            error: (error) => {
+            error: (error): void => {
                 console.error('Error fetching todos', error);
             },
-            complete: () => {
+            complete: (): void => {
                 console.log('Todo fetching completed');
             }
         });

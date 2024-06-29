@@ -1,12 +1,16 @@
 import {TestBed} from '@angular/core/testing';
 
 import {TodoService} from './todo.service';
+import {provideHttpClient, withFetch} from "@angular/common/http";
 
-describe('TodoService', () => {
+describe('TodoService', (): void => {
     let service: TodoService;
 
     beforeEach((): void => {
-        TestBed.configureTestingModule({});
+        TestBed.configureTestingModule({
+            providers: [TodoService,
+                provideHttpClient(withFetch())]
+        });
         service = TestBed.inject(TodoService);
     });
 

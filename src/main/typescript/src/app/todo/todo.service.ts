@@ -4,7 +4,7 @@ import {map, Observable} from "rxjs";
 import {Todo} from "./todo";
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: "root"
 })
 export class TodoService {
 

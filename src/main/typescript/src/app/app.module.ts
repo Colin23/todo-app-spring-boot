@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 
-import { AppComponent } from './app.component';
+import {AppComponent} from './app.component';
 import {FormsModule} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import {TodosComponent} from "./todos/todos.component";
@@ -8,9 +8,7 @@ import {RouterOutlet} from "@angular/router";
 import {CommonModule} from "@angular/common";
 
 @NgModule({
-    declarations: [
-
-    ],
+    declarations: [],
     imports: [
         CommonModule,
         FormsModule,
@@ -23,4 +21,5 @@ import {CommonModule} from "@angular/common";
     ],
     bootstrap: []
 })
-export class AppModule { }
+export class AppModule {
+}

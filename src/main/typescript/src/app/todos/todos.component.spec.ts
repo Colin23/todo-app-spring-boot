@@ -1,23 +1,25 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { TodosComponent } from './todos.component';
+import {TodosComponent} from './todos.component';
+import {provideHttpClient, withFetch} from "@angular/common/http";
 
-describe('TodosComponent', () => {
-  let component: TodosComponent;
-  let fixture: ComponentFixture<TodosComponent>;
+describe("TodosComponent", (): void => {
+    let component: TodosComponent;
+    let fixture: ComponentFixture<TodosComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [TodosComponent]
-    })
-    .compileComponents();
+    beforeEach(async (): Promise<void> => {
+        await TestBed.configureTestingModule({
+            imports: [TodosComponent],
+            providers: [provideHttpClient(withFetch())]
+        })
+            .compileComponents();
 
-    fixture = TestBed.createComponent(TodosComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+        fixture = TestBed.createComponent(TodosComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', (): void => {
+        expect(component).toBeTruthy();
+    });
 });
