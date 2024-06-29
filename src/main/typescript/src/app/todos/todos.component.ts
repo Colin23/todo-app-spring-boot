@@ -1,11 +1,16 @@
 import {Component, OnInit} from '@angular/core';
 import {Todo} from "../todo/todo";
 import {TodoService} from "../todo/todo.service";
+import {CommonModule} from "@angular/common";
 
 @Component({
     selector: 'app-todos',
     templateUrl: './todos.component.html',
     styleUrls: ['./todos.component.css'],
+    imports: [
+        CommonModule
+    ],
+    standalone: true
 })
 export class TodosComponent implements OnInit {
 
