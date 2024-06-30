@@ -1,0 +1,38 @@
+### Gradle ###
+.gradle
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+### IntelliJ IDEA ###
+*.iws
+*.ipr
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+### Compiled output ###
+/dist
+/tmp
+/out-tsc
+/bazel-out
+
+### Node ###
+node_modules
+npm-debug.log
+yarn-error.log
+**/.angular/**
+
+### Ignore Secrets ###
+application.properties
+.env
