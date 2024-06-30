@@ -1,1 +1,1 @@
-rootProject.name = "java-todo-app"
+rootProject.name = "todo-app-spring-boot"
