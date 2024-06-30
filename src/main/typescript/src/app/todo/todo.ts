@@ -6,7 +6,14 @@ export class Todo {
     todo_due_at: Date; // has to be named like this because of the JSON field name.
     todo_completed: boolean; // has to be named like this because of the JSON field name.
 
-    constructor(id: number, title: string, description: string, createdAt: Date, dueAt: Date, completed: boolean) {
+    constructor(
+        id: number,
+        title: string,
+        description: string,
+        createdAt: Date,
+        dueAt: Date,
+        completed: boolean
+    ) {
         this.id = id;
         this.todo_title = title;
         this.todo_description = description;

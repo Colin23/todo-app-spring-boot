@@ -1,5 +1,4 @@
-import {Todo} from './todo';
-
+import { Todo } from "./todo";
 
 describe("Todo", (): void => {
     it("should create an instance", (): void => {
