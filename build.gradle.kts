@@ -18,9 +18,13 @@ springBoot {
 }
 
 java {
-	toolchain {
-		languageVersion.set(JavaLanguageVersion.of(21))
-	}
+    sourceCompatibility = JavaVersion.VERSION_21 // Gradle should use Java 21 features and Syntax when compiling
+    toolchain {
+        // Gradle checks for a local Java 21 version and uses it if one is found.
+        // If there's no local version, the build crashes. The foojay-resolver-convention plugin is needed then.
+        languageVersion.set(JavaLanguageVersion.of(21))
+        vendor = JvmVendorSpec.ADOPTIUM // Gradle uses Eclipse Temurin (AdoptOpenJDK HotSpot)
+    }
 }
 
 repositories {
@@ -61,6 +65,13 @@ apply(from = "versioning.gradle.kts")
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+// TODO: Make sure this works. Perhaps another version has to be used, as the version is written in the version.properties file
+tasks.withType<Jar> {
+    manifest {
+        attributes["Implementation-Version"] = version
+    }
 }
 
 tasks.named<DefaultTask>("checkstyleMain").configure {

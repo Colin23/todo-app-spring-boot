@@ -41,6 +41,7 @@ yarn-error.log
 ### VS Code ###
 .vscode/
 
-### Ignore Secrets ###
+### Secrets ###
 application.properties
 .env
+http-client.private.env.json
