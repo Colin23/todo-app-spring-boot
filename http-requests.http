@@ -1,0 +1,3 @@
+### Simulate a POST request to the endpoint in the local environment
+GET {{host}}/api/v1/todos
+Content-Type: application/json
