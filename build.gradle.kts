@@ -7,6 +7,7 @@ plugins {
     id("org.springframework.boot") version "3.3.1"
     id("io.spring.dependency-management") version "1.1.5"
 	id("io.freefair.lombok") version "8.6"
+    id("org.cyclonedx.bom") version "1.10.0"
 	id("de.thetaphi.forbiddenapis") version "3.7"
 }
 
@@ -33,7 +34,7 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom ("org.springframework.boot:spring-boot-dependencies:3.3.1") // This actually sets every version I currently need
+        mavenBom ("org.springframework.boot:spring-boot-dependencies:3.3.1")
     }
 }
 
@@ -96,6 +97,15 @@ tasks.named<CheckForbiddenApis>("forbiddenApisTest").configure {
 
 tasks.named("check").configure {
 	dependsOn(tasks.named("forbiddenApisMain"))
+}
+
+tasks.cyclonedxBom {
+    setIncludeConfigs(listOf("runtimeClasspath"))
+    setSkipConfigs(listOf("compileClasspath", "testCompileClasspath"))
+    setProjectType("application")
+    setDestination(project.file("build/reports"))
+    setOutputName("bom")
+    setOutputFormat("json")
 }
 
 idea {
